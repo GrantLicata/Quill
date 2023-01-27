@@ -9,7 +9,6 @@ function Add() {
   const [userInfo, setUserInfo] = useState({
     title: '',
     description: '',
-    information: '',
   });
 
   const onChangeValue = (e) => {
@@ -25,25 +24,18 @@ function Add() {
     });
   } 
 
-  const onInformation = (value) => {
-    setUserInfo({ ...userInfo,
-      information:value
-    });
-  } 
-
   const [isError, setError] = useState(null);
   const addDetails = async (event) => {
     try {
       event.preventDefault();
       event.persist();
-      if(userInfo.description.length < 50){
-        setError('Required, Add description minimum length 50 characters');
+      if(userInfo.description.length < 5){
+        setError('Required, Add description minimum length 5 characters');
         return;
       }
       axios.post(`http://localhost:8080/addArticle`, {
         title: userInfo.title,
         description: userInfo.description,
-        information: userInfo.information,
       })
       .then(res => {
         if(res.data.success === true){
@@ -77,7 +69,7 @@ return (
         <br />
         {isError !== null && <div> {isError} </div>}
         <div>
-          <button type="submit"> Submit  </button>
+          <button className="bg-gray-300 rounded-lg p-1 hover:bg-slate-200" type="submit"> Submit  </button>
         </div> 
       </div> 
     </form>
