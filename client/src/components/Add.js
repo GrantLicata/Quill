@@ -78,19 +78,6 @@ return (
             />
             </div>
             <br />
-            <div className="form-group col-md-12 editor">
-              <label className="font-weight-bold"> Additional Information  </label>
-            <EditorToolbar toolbarId={'t2'}/>
-            <ReactQuill
-              theme="snow"
-              value={userInfo.information}
-              onChange={oninformation}
-              placeholder={"Write something awesome..."}
-              modules={modules('t2')}
-              formats={formats}
-            />
-            </div>
-            <br />
             {isError !== null && <div className="errors"> {isError} </div>}
             <div className="form-group col-sm-12 text-right">
               <button type="submit" className="btn btn__theme"> Submit  </button>
