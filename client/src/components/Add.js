@@ -1,34 +1,36 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
-import "react-quill/dist/quill.snow.css";
-import "./TextEditor.css";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 function Add() {
   let history = useNavigate();
-  const [userInfo, setuserInfo] = useState({
+  const [userInfo, setUserInfo] = useState({
     title: '',
     description: '',
     information: '',
   });
+
   const onChangeValue = (e) => {
-    setuserInfo({
+    setUserInfo({
       ...userInfo,
       [e.target.name]:e.target.value
     });
   } 
-  const ondescription = (value) => {
-    setuserInfo({ ...userInfo,
+
+  const onDescription = (value) => {
+    setUserInfo({ ...userInfo,
       description:value
     });
   } 
-  const oninformation = (value) => {
-    setuserInfo({ ...userInfo,
+
+  const onInformation = (value) => {
+    setUserInfo({ ...userInfo,
       information:value
     });
   } 
+
   const [isError, setError] = useState(null);
   const addDetails = async (event) => {
     try {
@@ -52,42 +54,34 @@ function Add() {
   } 
 
 return ( 
-<>
-
-  <div className="App">
-    <div className="container">
-      <div className="row"> 
-        <form onSubmit={addDetails} className="update__forms">
-          <h3 className="myaccount-content"> Add  </h3>
-          <div className="form-row">
-            <div className="form-group col-md-12">
-              <label className="font-weight-bold"> Title <span className="required"> * </span> </label>
-              <input type="text" name="title" value={userInfo.title} onChange={onChangeValue}  className="form-control" placeholder="Title" required />
-            </div>
-            <div className="clearfix"></div>
-            <div className="form-group col-md-12 editor">
-              <label className="font-weight-bold"> Description <span className="required"> * </span> </label>
-            <EditorToolbar toolbarId={'t1'}/>
-            <ReactQuill
-              theme="snow"
-              value={userInfo.description}
-              onChange={ondescription}
-              placeholder={"Write something awesome..."}
-              modules={modules('t1')}
-              formats={formats}
-            />
-            </div>
-            <br />
-            {isError !== null && <div className="errors"> {isError} </div>}
-            <div className="form-group col-sm-12 text-right">
-              <button type="submit" className="btn btn__theme"> Submit  </button>
-            </div> 
-          </div> 
-        </form>
-      </div>
-    </div>
-  </div>
-</>
+  <>
+    <form onSubmit={addDetails}>
+      <h3> Add New Note </h3>
+      <div>
+        <div>
+          <label> Title <span> * </span> </label>
+          <input type="text" name="title" value={userInfo.title} onChange={onChangeValue} placeholder="Title" required />
+        </div>
+        <div>
+          <label> Description <span> * </span> </label>
+        <EditorToolbar toolbarId={'t1'}/>
+        <ReactQuill
+          theme="snow"
+          value={userInfo.description}
+          onChange={onDescription}
+          placeholder={"Write something awesome..."}
+          modules={modules('t1')}
+          formats={formats}
+        />
+        </div>
+        <br />
+        {isError !== null && <div> {isError} </div>}
+        <div>
+          <button type="submit"> Submit  </button>
+        </div> 
+      </div> 
+    </form>
+  </>
 )
 }
 export default Add
