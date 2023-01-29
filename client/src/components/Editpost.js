@@ -7,24 +7,24 @@ import axios from 'axios';
 
 function Editpost(props) {
   let history = useNavigate();
-  const [userInfo, setuserInfo] = useState({
+  const [userInfo, setUserInfo] = useState({
     title: props.postList[0].title,
     description: props.postList[0].description,
     information: props.postList[0].information,
   });
   const onChangeValue = (e) => {
-    setuserInfo({
+    setUserInfo({
       ...userInfo,
       [e.target.name]:e.target.value
     });
   }
-  const ondescription = (value) => {
-    setuserInfo({ ...userInfo,
+  const onDescription = (value) => {
+    setUserInfo({ ...userInfo,
       description:value
     });
   } 
-  const oninformation = (value) => {
-    setuserInfo({ ...userInfo,
+  const onInformation = (value) => {
+    setUserInfo({ ...userInfo,
       information:value
     });
   }  
@@ -66,7 +66,7 @@ return (
           <ReactQuill
             theme="snow"
             value={userInfo.description}
-            onChange={ondescription}
+            onChange={onDescription}
             placeholder={"Write something awesome..."}
             modules={modules('t1')}
             formats={formats}
@@ -79,7 +79,7 @@ return (
           <ReactQuill
             theme="snow"
             value={userInfo.information}
-            onChange={oninformation}
+            onChange={onInformation}
             placeholder={"Write something awesome..."}
             modules={modules('t2')}
             formats={formats}
