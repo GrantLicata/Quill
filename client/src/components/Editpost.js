@@ -30,12 +30,12 @@ function Editpost(props) {
   }  
  
   const [isError, setError] = useState(null);
-  const PoemAddbooks = async (event) => {
+  const editNote = async (event) => {
     try {
       event.preventDefault();
       event.persist();
-      if(userInfo.description.length < 50){
-        setError('Required, Add description minimum length 50 characters');
+      if(userInfo.description.length < 10){
+        setError('Required, add note with minimum length of 10 characters');
         return;
       }
       axios.post(`http://localhost:8080/editArticle`, {
@@ -53,7 +53,7 @@ function Editpost(props) {
   }
 return (
   <> 
-    <form onSubmit={PoemAddbooks}>
+    <form onSubmit={editNote}>
       <h3> Edit   </h3>
       <div>
         <div>
