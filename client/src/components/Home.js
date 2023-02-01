@@ -7,13 +7,13 @@ function App() {
       viewPost();
   }, []);
 
-  const [ispost, setpost] = useState([]);
+  const [isPost, setPost] = useState([]);
   const viewPost = async() =>{
     try {
       await axios.get(`http://localhost:8080/allPost`,)
       .then(res => { 
         if(res.data.success === true){
-          setpost(res.data.listall);
+          setPost(res.data.listall);
         }
       })
     } catch (error) { throw error;}
@@ -26,7 +26,7 @@ function App() {
         <h1 className="App__tittle"> React <span> Quill </span> powerful rich text editor </h1>
         <Link to="/Add" className="btn btn__theme btn__add"> Create Now </Link>
 
-        {ispost.map((item,index) => ( 
+        {isPost.map((item,index) => ( 
           <div className="post__list" key={index}>
             <h2>{item.title}</h2>
 
