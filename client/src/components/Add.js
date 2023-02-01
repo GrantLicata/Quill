@@ -6,9 +6,10 @@ import axios from 'axios';
 
 function Add() {
   let history = useNavigate();
+  const [isError, setError] = useState(null);
   const [userInfo, setUserInfo] = useState({
     title: '',
-    description: '',
+    note: '',
   });
 
   const onChangeValue = (e) => {
@@ -20,22 +21,21 @@ function Add() {
 
   const onDescription = (value) => {
     setUserInfo({ ...userInfo,
-      description:value
+      note:value
     });
   } 
 
-  const [isError, setError] = useState(null);
-  const addDetails = async (event) => {
+  const addNote = async (event) => {
     try {
       event.preventDefault();
       event.persist();
-      if(userInfo.description.length < 5){
-        setError('Required, Add description minimum length 5 characters');
+      if(userInfo.note.length < 5){
+        setError('Required, Add note minimum length 5 characters');
         return;
       }
       axios.post(`http://localhost:8080/addArticle`, {
         title: userInfo.title,
-        description: userInfo.description,
+        note: userInfo.note,
       })
       .then(res => {
         if(res.data.success === true){
@@ -47,7 +47,7 @@ function Add() {
 
 return ( 
   <>
-    <form onSubmit={addDetails}>
+    <form onSubmit={addNote}>
       <h3> Add New Note </h3>
       <div>
         <div>
@@ -55,11 +55,11 @@ return (
           <input type="text" name="title" value={userInfo.title} onChange={onChangeValue} placeholder="Title" required />
         </div>
         <div>
-          <label> Description <span> * </span> </label>
+          <label> Note <span> * </span> </label>
         <EditorToolbar toolbarId={'t1'}/>
         <ReactQuill
           theme="snow"
-          value={userInfo.description}
+          value={userInfo.note}
           onChange={onDescription}
           placeholder={"Write something awesome..."}
           modules={modules('t1')}
