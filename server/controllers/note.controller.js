@@ -1,4 +1,4 @@
-const Note = require('../models/author.model')
+const Note = require('../models/note.model')
 
 module.exports = {
     getAllNotes:(req,res) => {
