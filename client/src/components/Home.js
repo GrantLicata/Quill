@@ -20,20 +20,17 @@ function App() {
   }
  
   return (
-  <div className="App">
-    <div className="container">
-      <div className="row">
-        <h1 className="App__tittle"> React <span> Quill </span> powerful rich text editor </h1>
+  <div>
+    <div>
+      <div>
+        <h1> React <span> Quill </span> powerful rich text editor </h1>
         <Link to="/Add" className="btn btn__theme btn__add"> Create Now </Link>
 
         {isPost.map((item,index) => ( 
-          <div className="post__list" key={index}>
+          <div key={index}>
             <h2>{item.title}</h2>
-
-            <div className="post__description" dangerouslySetInnerHTML={{ __html: item.description}}  />
-            <div className="post__description" dangerouslySetInnerHTML={{ __html: item.information}}  />
+            <div dangerouslySetInnerHTML={{ __html: item.note}}  />
             <Link to={`/Edit/${item.id}`} className="btn btn__theme"> Edit </Link>
-
           </div>
         ))}
         
