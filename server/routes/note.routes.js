@@ -1,4 +1,4 @@
-const NoteController = require('../controllers/author.controllers')
+const NoteController = require('../controllers/note.controller')
 
 module.exports = (app) => {
     //get all authors
