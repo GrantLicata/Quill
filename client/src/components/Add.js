@@ -23,25 +23,19 @@ function Add() {
     });
   } 
 
-  const addNote = async (event) => {
-    try {
-      event.preventDefault();
-      event.persist();
-      if(userInfo.note.length < 5){
-        setError('Required, Add note minimum length 5 characters');
-        return;
-      }
-      axios.post(`http://localhost:8080/addNote`, {
-        title: userInfo.title,
-        note: userInfo.note,
-      })
-      .then(res => {
-        if(res.data.success === true){
-          navigate('/');
-        }
-      })
-    } catch (error) { throw error;}    
-  } 
+  const addNote = (e) => {
+    e.preventDefault();
+    e.persist();
+    axios.post(`http://localhost:8000/api/addNote`, {
+      title: userInfo.title,
+      note: userInfo.note,
+    }).then((res) => {
+      console.log(res)
+      navigate('/')
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
 
 return ( 
   <>
