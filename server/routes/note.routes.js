@@ -4,7 +4,7 @@ module.exports = (app) => {
     //get all authors
     app.get('/api/allNotes', NoteController.getAllNotes)
     //get one author
-    app.get('/api/author/:id', NoteController.getOneNote)
+    app.get('/api/note/:id', NoteController.getOneNote)
     //create new author
     app.post('/api/addNote', NoteController.addNote)
     //update author
