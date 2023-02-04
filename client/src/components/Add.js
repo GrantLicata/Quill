@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 function Add() {
-  let history = useNavigate();
+  let navigate = useNavigate();
   const [isError, setError] = useState(null);
   const [userInfo, setUserInfo] = useState({
     title: '',
@@ -14,14 +14,12 @@ function Add() {
 
   const onChangeValue = (e) => {
     setUserInfo({
-      ...userInfo,
-      [e.target.name]:e.target.value
+      ...userInfo, [e.target.name]:e.target.value
     });
   } 
 
   const onDescription = (value) => {
-    setUserInfo({ ...userInfo,
-      note:value
+    setUserInfo({ ...userInfo, note:value
     });
   } 
 
@@ -33,13 +31,13 @@ function Add() {
         setError('Required, Add note minimum length 5 characters');
         return;
       }
-      axios.post(`http://localhost:8080/addArticle`, {
+      axios.post(`http://localhost:8080/addNote`, {
         title: userInfo.title,
         note: userInfo.note,
       })
       .then(res => {
         if(res.data.success === true){
-          history.push('/');
+          navigate('/');
         }
       })
     } catch (error) { throw error;}    
