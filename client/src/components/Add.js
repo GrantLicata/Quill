@@ -57,12 +57,12 @@ return (
             placeholder={"Write something awesome..."}
             modules={modules('t1')}
             formats={formats}
+            style={{height: "300px"}}
           />
         </div>
-        <br/>
         {isError !== null && <div> {isError} </div>}
-        <div>
-          <button className="bg-gray-300 rounded-lg p-1 hover:bg-slate-200" type="submit"> Submit  </button>
+        <div className="mt-3">
+          <button className="bg-blue-200 rounded-lg p-1 hover:bg-blue-400 px-4 py-1" type="submit">Submit</button>
         </div> 
       </div> 
     </form>
