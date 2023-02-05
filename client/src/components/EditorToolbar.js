@@ -89,7 +89,6 @@ export const formats = [
   "code-block"
 ];
 
-
 // Quill Toolbar component
 export const QuillToolbar = (props) => {
   return  (

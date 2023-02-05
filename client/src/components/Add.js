@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +36,7 @@ function Add() {
       navigate('/')
     }).catch((err) => {
       console.log(err)
+      setError(err)
     })
   }
 

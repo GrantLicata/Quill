@@ -12,6 +12,8 @@ code {
     monospace;
 }
 
-@tailwind base;
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
+
+/* Custom CSS doesn't work with create-react-app. Will need to transition to Next.js down the road to allow for more style friendly development. */
