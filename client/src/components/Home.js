@@ -27,7 +27,7 @@ function App() {
           <div key={index}>
             <h2>{item.title}</h2>
             <div dangerouslySetInnerHTML={{ __html: item.note}}  />
-            <Link to={`/Edit/${item.id}`} className="btn btn__theme"> Edit </Link>
+            <Link to={`/Edit/${item.id}`}> Edit </Link>
           </div>
         ))}
         

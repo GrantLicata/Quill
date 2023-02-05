@@ -7,19 +7,21 @@ import axios from 'axios';
 function Add() {
   let navigate = useNavigate();
   const [isError, setError] = useState(null);
-  const [userInfo, setUserInfo] = useState({
+  const [note, setNote] = useState({
     title: '',
-    note: '',
+    body: '',
   });
 
-  const onChangeValue = (e) => {
-    setUserInfo({
-      ...userInfo, [e.target.name]:e.target.value
+  const onChangeTitle = (e) => {
+    setNote({
+      ...note, [e.target.name]:e.target.value
     });
   } 
 
-  const onDescription = (value) => {
-    setUserInfo({ ...userInfo, note:value
+  const onChangeBody = (value) => {
+    console.log(value)
+    setNote({
+      ...note, body:value
     });
   } 
 
@@ -27,8 +29,8 @@ function Add() {
     e.preventDefault();
     e.persist();
     axios.post(`http://localhost:8000/api/addNote`, {
-      title: userInfo.title,
-      note: userInfo.note,
+      title: note.title,
+      note: note.body,
     }).then((res) => {
       console.log(res)
       navigate('/')
@@ -43,16 +45,16 @@ return (
       <h3> Add New Note </h3>
       <div>
         <div>
-          <label> Title <span> * </span> </label>
-          <input type="text" name="title" value={userInfo.title} onChange={onChangeValue} placeholder="Title" required />
+          <label>Title</label>
+          <input type="text" name="title" value={note.title} onChange={onChangeTitle} placeholder="Title" required />
         </div>
         <div>
           <label> Note <span> * </span> </label>
         <EditorToolbar toolbarId={'t1'}/>
         <ReactQuill
           theme="snow"
-          value={userInfo.note}
-          onChange={onDescription}
+          value={note.body}
+          onChange={onChangeBody}
           placeholder={"Write something awesome..."}
           modules={modules('t1')}
           formats={formats}
