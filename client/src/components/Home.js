@@ -3,30 +3,27 @@ import {Link } from "react-router-dom";
 import axios from 'axios';
 
 function App() {
-  useEffect(() => {
-      viewPost();
-  }, []);
 
-  const [isPost, setPost] = useState([]);
-  const viewPost = async() =>{
-    try {
-      await axios.get(`http://localhost:8080/allPost`,)
-      .then(res => { 
-        if(res.data.success === true){
-          setPost(res.data.listall);
-        }
-      })
-    } catch (error) { throw error;}
-  }
+  const [note, setNote] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/allNotes')
+    .then((res) => {
+        console.log(res)
+        setNote(res.data)
+    }).catch((err) => {
+        console.log(err)
+    })
+  },[])
  
   return (
   <div>
     <div>
       <div>
-        <h1> React <span> Quill </span> powerful rich text editor </h1>
-        <Link to="/Add" className="btn btn__theme btn__add"> Create Now </Link>
+        <h1> Quill Test Development </h1>
+        <Link to="/Add"> Create New Note </Link>
 
-        {isPost.map((item,index) => ( 
+        {note.map((item,index) => ( 
           <div key={index}>
             <h2>{item.title}</h2>
             <div dangerouslySetInnerHTML={{ __html: item.note}}  />
