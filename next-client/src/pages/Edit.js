@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
-import Editpost from './Editpost';
+import Editpost from '../components/Editpost';
 
 const Edit = (props) => {
   useEffect(() => {
