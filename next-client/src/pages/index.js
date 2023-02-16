@@ -11,7 +11,7 @@ export default function Home() {
       <section>
         <a>Stuff here</a>
       </section>
-      <Editor></Editor>
+      {/* <Editor></Editor> */}
     </Layout>
   )
 }

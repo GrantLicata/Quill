@@ -3,9 +3,11 @@ import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { useRouter } from "next/router";
 
 export default function Editor() {
     let navigate = useNavigate();
+    // let router = useRouter();
     const [isError, setError] = useState(null);
     const [note, setNote] = useState({
       title: '',
@@ -33,7 +35,7 @@ export default function Editor() {
         note: note.body,
       }).then((res) => {
         console.log(res)
-        navigate('/')
+        // router.push('/')
       }).catch((err) => {
         console.log(err)
         setError(err)
