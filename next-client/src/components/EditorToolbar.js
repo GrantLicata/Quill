@@ -1,5 +1,6 @@
 import React from "react";
 import { Quill } from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 // Custom Undo button icon component for Quill editor.
 const CustomUndo = () => (

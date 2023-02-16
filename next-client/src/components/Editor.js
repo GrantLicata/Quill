@@ -1,13 +1,12 @@
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
-import { useNavigate } from "react-router-dom";
+import "react-quill/dist/quill.snow.css";
 import axios from 'axios';
 import { useRouter } from "next/router";
 
 export default function Editor() {
-    // let navigate = useNavigate();
-    let router = useRouter();
+    const router = useRouter();
     const [isError, setError] = useState(null);
     const [note, setNote] = useState({
       title: '',
