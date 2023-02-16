@@ -1,17 +1,17 @@
 import Head from 'next/head'
-import Layout, {siteTitle} from '@/components/Layout'
-import Editor from '@/components/Editor'
+import Layout from '@/components/Layout'
+import Link from 'next/link'
 
 export default function Home() {
   return (
     <Layout>
       <Head>
-        <title>{siteTitle}</title>
+        <title>Quill</title>
       </Head>
-      <section>
-        <a>Stuff here</a>
-      </section>
-      {/* <Editor></Editor> */}
+      <main className='text-center mt-6'>
+        <h1 className='mb-4'>Welcome to Quill</h1>
+        <Link href='/notebook' className='p-2 border rounded-lg bg-slate-300'>Enter the Notebook</Link>
+      </main>
     </Layout>
   )
 }
