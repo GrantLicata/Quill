@@ -41,6 +41,7 @@ export default function Editor() {
       })
     }
 
+    //This isn't working well. Need to explore.
     return (
         <form className="m-6" onSubmit={addNote}>
             <h3 className="mb-4 text-xl"> Add New Note </h3>
