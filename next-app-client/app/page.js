@@ -1,0 +1,78 @@
+import Image from 'next/image'
+import { Inter } from '@next/font/google'
+import styles from './page.module.css'
+import { useState } from "react";
+import ReactQuill from "react-quill";
+import EditorToolbar, { modules, formats } from "./EditorToolbar";
+import "react-quill/dist/quill.snow.css";
+import axios from 'axios';
+import { useRouter } from "next/router";
+
+const inter = Inter({ subsets: ['latin'] })
+
+  export default function Home() {
+    const router = useRouter();
+    const [isError, setError] = useState(null);
+    const [note, setNote] = useState({
+      title: '',
+      body: '',
+    });
+
+    const onChangeTitle = (e) => {
+      setNote({
+        ...note, [e.target.name]:e.target.value
+      });
+    } 
+
+    const onChangeBody = (value) => {
+      console.log(value)
+      setNote({
+        ...note, body:value
+      });
+    } 
+
+    const addNote = (e) => {
+      e.preventDefault();
+      e.persist();
+      axios.post(`http://localhost:8000/api/addNote`, {
+        title: note.title,
+        note: note.body,
+      }).then((res) => {
+        console.log(res)
+        router.push('/')
+      }).catch((err) => {
+        console.log(err)
+        setError(err)
+      })
+    }
+
+  return (
+    <div>
+      <form className="m-6" onSubmit={addNote}>
+        <h3 className="mb-4 text-xl"> Add New Note </h3>
+        <div>
+          <div>
+            <label className="font-bold">Title: </label>
+            <input className="bg-slate-100 rounded-md pl-2" type="text" name="title" value={note.title} onChange={onChangeTitle} placeholder="Enter title" required />
+          </div>
+          <div className="mt-3">
+            <EditorToolbar toolbarId={'t1'}/>
+            <ReactQuill
+              theme="snow"
+              value={note.body}
+              onChange={onChangeBody}
+              placeholder={"Write something awesome..."}
+              modules={modules('t1')}
+              formats={formats}
+              style={{height: "300px"}}
+            />
+          </div>
+          {isError !== null && <div> {isError} </div>}
+          <div className="mt-3">
+            <button className="bg-blue-200 rounded-lg p-1 hover:bg-blue-400 px-4 py-1" type="submit">Submit</button>
+          </div> 
+        </div> 
+      </form>
+    </div>
+  )
+}
