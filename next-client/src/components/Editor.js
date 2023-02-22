@@ -5,7 +5,10 @@ import "react-quill/dist/quill.snow.css";
 import axios from 'axios';
 import { useRouter } from "next/router";
 
-//Document that may hold solution to document undefined error: https://flaviocopes.com/error-document-not-defined/
+//Document that may hold solution to document undefined error:
+// https://flaviocopes.com/error-document-not-defined/
+// https://github.com/rfoel/bulma-toast/issues/33
+// https://www.youtube.com/watch?v=L3miLKtsgak
 
 export default function Editor() {
     const router = useRouter();
