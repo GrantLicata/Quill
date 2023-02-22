@@ -5,6 +5,8 @@ import "react-quill/dist/quill.snow.css";
 import axios from 'axios';
 import { useRouter } from "next/router";
 
+//Document that may hold solution to document undefined error: https://flaviocopes.com/error-document-not-defined/
+
 export default function Editor() {
     const router = useRouter();
     const [isError, setError] = useState(null);
