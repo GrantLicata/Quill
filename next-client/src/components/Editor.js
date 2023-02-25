@@ -1,14 +1,17 @@
-import { useState } from "react";
-import ReactQuill from "react-quill";
-import EditorToolbar, { modules, formats } from "./EditorToolbar";
+import { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import axios from 'axios';
 import { useRouter } from "next/router";
+import ReactQuill from "react-quill";
+import EditorToolbar, { modules, formats } from "./EditorToolbar";
 
 //Document that may hold solution to document undefined error:
 // https://flaviocopes.com/error-document-not-defined/
 // https://github.com/rfoel/bulma-toast/issues/33
 // https://www.youtube.com/watch?v=L3miLKtsgak
+// https://www.webtutpro.com/solve-document-is-not-defined-errors-in-next-js-26fea778b868 
+// The one below is the solution (using dynamic from Next.js)
+// https://www.simplenextjs.com/posts/next-rich-editor-quill
 
 export default function Editor() {
     const router = useRouter();
