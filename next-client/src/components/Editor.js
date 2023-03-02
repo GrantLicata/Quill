@@ -49,6 +49,11 @@ export default function Editor() {
       })
     }
 
+    const quillNoSSRWrapper = dynamic(import('react-quill'), {
+      ssr: false,
+      loading: () => <p>Loading ...</p>
+    })
+
     //This isn't working well. Need to explore.
     return (
         <form className="m-6" onSubmit={addNote}>
