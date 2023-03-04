@@ -4,7 +4,7 @@ const NoteSchema = new mongoose.Schema({
     title: {
         type: String,
     },
-    note: {
+    body: {
         type: String,
     }
 },{timestamps: true})

@@ -9,18 +9,22 @@ import parse from 'html-react-parser';
 export default function Editor() {
   const router = useRouter();
   const [isError, setError] = useState(null);
-  const [note, setNote] = useState([]);
+  const [note, setNote] = useState([])
+  const [draft, setDraft] = useState([{
+    title: '',
+    body: '',
+  }]);
   
   const onChangeTitle = (e) => {
-    setNote({
-      ...note, [e.target.name]:e.target.value
+    setDraft({
+      ...draft, [e.target.name]:e.target.value
     });
   } 
   
   const onChangeBody = (value) => {
     console.log(value)
-    setNote({
-      ...note, body:value
+    setDraft({
+      ...draft, body:value
     });
   } 
   
@@ -28,10 +32,10 @@ export default function Editor() {
     e.preventDefault();
     e.persist();
     axios.post(`http://localhost:8000/api/addNote`, {
-      title: note.title,
-      note: note.body,
+      title: draft.title,
+      body: draft.body,
     }).then((res) => {
-      console.log(res)
+      console.log("Successful note entry", res)
       router.push('/')
     }).catch((err) => {
       console.log(err)
@@ -58,7 +62,7 @@ export default function Editor() {
         </div>
         <ReactQuill
           theme="snow"
-          value={note.body}
+          value={draft.body}
           onChange={onChangeBody}
           placeholder={"Write something awesome..."}
           style={{height: "200px"}}
@@ -71,12 +75,12 @@ export default function Editor() {
       </form>
 
       <div className='mt-4'>
-        {note.map((item,index) => ( 
+        {note.map((item,index) => (
           <div key={index} className="my-2 rounded-lg border border-black-600 p-2">
             <h2 className='mb-2'><span className='font-bold'>Title:</span> {item.title}</h2>
             <div>
               <div className="mt-2">
-                {parse(item.note)}
+                {parse(item.body)}
               </div>
             </div>
           </div>
