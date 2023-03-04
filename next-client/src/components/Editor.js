@@ -43,29 +43,26 @@ export default function Editor() {
   
   return (
     <form className="m-6" onSubmit={addNote}>
-          <h3 className="mb-4 text-xl"> Add New Note </h3>
-          <div>
-              <div>
-                <label className="font-bold">Title: </label>
-                <input className="bg-slate-100 rounded-md pl-2" type="text" name="title" value={note.title} onChange={onChangeTitle} placeholder="Enter title" required />
-              </div>
-              <div className="mt-3">
-                <ReactQuill
-                    theme="snow"
-                    value={note.body}
-                    onChange={onChangeBody}
-                    placeholder={"Write something awesome..."}
-                    style={{height: "200px"}}
-                    />
-                <button className="bg-blue-200 rounded-lg p-1 hover:bg-blue-400 px-4 py-1" type="submit">Submit</button>
-              </div>
-                {isError !== null && <div> {isError} </div>}
-              <div className="mt-3">
-              </div> 
-          </div> 
-      </form>
-    )
-  }
+      <h3 className="mb-4 text-xl"> Add New Note </h3>
+      <div>
+        <label className="font-bold">Title: </label>
+        <input className="bg-slate-100 rounded-md pl-2" type="text" name="title" value={note.title} onChange={onChangeTitle} placeholder="Enter title" required />
+      </div>
+      <ReactQuill
+        theme="snow"
+        value={note.body}
+        onChange={onChangeBody}
+        placeholder={"Write something awesome..."}
+        style={{height: "200px"}}
+        className="mt-3"
+        />
+      <div className="mt-3">
+        {isError !== null && <div> {isError} </div>}
+      </div>
+      <button className="bg-blue-200 rounded-lg p-1 hover:bg-blue-400 px-4 py-1 mt-11" type="submit">Submit</button>
+    </form>
+  )
+}
 
   //Document that may hold solution to document undefined error:
   // https://flaviocopes.com/error-document-not-defined/
