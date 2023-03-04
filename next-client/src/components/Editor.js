@@ -4,14 +4,12 @@ import { useRouter } from "next/router";
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
+import parse from 'html-react-parser';
 
 export default function Editor() {
   const router = useRouter();
   const [isError, setError] = useState(null);
-  const [note, setNote] = useState([{
-    title: '',
-    body: '',
-  }]);
+  const [note, setNote] = useState([]);
   
   const onChangeTitle = (e) => {
     setNote({
@@ -78,7 +76,7 @@ export default function Editor() {
             <h2 className='mb-2'><span className='font-bold'>Title:</span> {item.title}</h2>
             <div>
               <div className="mt-2">
-                {item.note}
+                {parse(item.note)}
               </div>
             </div>
           </div>
