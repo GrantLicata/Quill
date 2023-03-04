@@ -1,14 +1,14 @@
 const NoteController = require('../controllers/note.controller')
 
 module.exports = (app) => {
-    //get all authors
+    //get all notes
     app.get('/api/allNotes', NoteController.getAllNotes)
-    //get one author
+    //get one note
     app.get('/api/note/:id', NoteController.getOneNote)
-    //create new author
+    //create new note
     app.post('/api/addNote', NoteController.addNote)
-    //update author
+    //update note
     app.put('/api/update/:id', NoteController.updateNote)
-    //delete author
+    //delete note
     app.delete('/api/delete/:id', NoteController.deleteNote)
 }

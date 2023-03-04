@@ -8,10 +8,10 @@ import 'react-quill/dist/quill.snow.css';
 export default function Editor() {
   const router = useRouter();
   const [isError, setError] = useState(null);
-  const [note, setNote] = useState({
+  const [note, setNote] = useState([{
     title: '',
     body: '',
-  });
+  }]);
   
   const onChangeTitle = (e) => {
     setNote({
@@ -40,26 +40,51 @@ export default function Editor() {
       setError(err)
     })
   }
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/allNotes')
+    .then((res) => {
+        console.log(res)
+        setNote(res.data)
+    }).catch((err) => {
+        console.log(err)
+    })
+  },[])
   
   return (
-    <form className="m-6" onSubmit={addNote}>
-      <div>
-        <label className="font-bold">Title: </label>
-        <input className="bg-slate-100 rounded-md pl-2" type="text" name="title" value={note.title} onChange={onChangeTitle} placeholder="Enter title" required />
+    <div className="m-6">
+      <form onSubmit={addNote}>
+        <div>
+          <label className="font-bold">Title: </label>
+          <input className="bg-slate-100 rounded-md pl-2" type="text" name="title" value={note.title} onChange={onChangeTitle} placeholder="Enter title" required />
+        </div>
+        <ReactQuill
+          theme="snow"
+          value={note.body}
+          onChange={onChangeBody}
+          placeholder={"Write something awesome..."}
+          style={{height: "200px"}}
+          className="mt-3"
+          />
+        <div className="mt-3">
+          {isError !== null && <div> {isError} </div>}
+        </div>
+        <button className="bg-blue-200 rounded-lg p-1 hover:bg-blue-400 px-4 py-1 mt-11" type="submit">Submit</button>
+      </form>
+
+      <div className='mt-4'>
+        {note.map((item,index) => ( 
+          <div key={index} className="my-2 rounded-lg border border-black-600 p-2">
+            <h2 className='mb-2'><span className='font-bold'>Title:</span> {item.title}</h2>
+            <div>
+              <div className="mt-2">
+                {item.note}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-      <ReactQuill
-        theme="snow"
-        value={note.body}
-        onChange={onChangeBody}
-        placeholder={"Write something awesome..."}
-        style={{height: "200px"}}
-        className="mt-3"
-        />
-      <div className="mt-3">
-        {isError !== null && <div> {isError} </div>}
-      </div>
-      <button className="bg-blue-200 rounded-lg p-1 hover:bg-blue-400 px-4 py-1 mt-11" type="submit">Submit</button>
-    </form>
+    </div>
   )
 }
 
