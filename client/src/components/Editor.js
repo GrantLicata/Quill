@@ -47,7 +47,7 @@ export default function Editor() {
   }
 
   const deleteNote = (noteID) => {
-    axios.delete('http://localhost:8000/api/delete/${noteID}')
+    axios.delete(`http://localhost:8000/api/delete/${noteID}`)
     .then((res) => {
       console.log("Record deleted", res)
       removeNoteFromList(noteID)
