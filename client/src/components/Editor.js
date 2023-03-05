@@ -27,15 +27,30 @@ export default function Editor() {
       ...draft, body:value
     });
   } 
+
+  const removeNoteFromList = (noteID) => {
+    setNote(note.filter(note => note._id !== noteID));
+}
   
   const addNote = (e) => {
-    e.preventDefault();
     e.persist();
     axios.post(`http://localhost:8000/api/addNote`, {
       title: draft.title,
       body: draft.body,
     }).then((res) => {
       console.log("Successful note entry", res)
+      router.push('/')
+    }).catch((err) => {
+      console.log(err)
+      setError(err)
+    })
+  }
+
+  const deleteNote = (noteID) => {
+    axios.delete('http://localhost:8000/api/delete/${noteID}')
+    .then((res) => {
+      console.log("Record deleted", res)
+      removeNoteFromList(noteID)
       router.push('/')
     }).catch((err) => {
       console.log(err)
@@ -55,6 +70,7 @@ export default function Editor() {
   
   return (
     <div className="m-6">
+      {/* Note Creation Form */}
       <form onSubmit={addNote}>
         <div>
           <label className="font-bold">Title: </label>
@@ -74,14 +90,21 @@ export default function Editor() {
         <button className="bg-blue-200 rounded-lg p-1 hover:bg-blue-400 px-4 py-1 mt-11" type="submit">Submit</button>
       </form>
 
+      {/* List of Notes */}
       <div className='mt-4'>
         {note.map((item,index) => (
           <div key={index} className="my-2 rounded-lg border border-black-600 p-2">
             <h2 className='mb-2'><span className='font-bold'>Title:</span> {item.title}</h2>
-            <div>
-              <div className="mt-2">
-                {parse(item.body)}
-              </div>
+            <div className="mt-2">
+              {parse(item.body)}
+            </div>
+            <div className="pt-4">
+              <button className="bg-slate-200 rounded-lg p-1 hover:bg-slate-400 px-4 py-1 mr-2" type="submit">Edit</button>
+              <button 
+                className="bg-red-200 rounded-lg p-1 hover:bg-red-400 px-4 py-1" 
+                type="submit"
+                onClick={(e) => deleteNote(item._id)}
+                >Delete</button>
             </div>
           </div>
         ))}
