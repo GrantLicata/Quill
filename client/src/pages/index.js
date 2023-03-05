@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <Layout>
       <Head>
-        <title>Quill</title>
+        <title>Scribe</title>
       </Head>
       <Editor/>
     </Layout>

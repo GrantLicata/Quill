@@ -24,7 +24,7 @@ const Edit = (props) => {
 return (
 <>
   {ispostId.length > 0 ? <>    
-    <Editpost postList={ispostId}  editPostID={props.match.params.postID} />      
+    <Editpost postList={ispostId} editPostID={props.match.params.postID} />      
   </> : null }
 
 </>
