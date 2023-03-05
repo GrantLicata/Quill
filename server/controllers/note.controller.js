@@ -2,7 +2,7 @@ const Note = require('../models/note.model')
 
 module.exports = {
     getAllNotes:(req,res) => {
-        Note.find().sort({name: 1})
+        Note.find().sort({createdAt: -1})
         .then((results) => {
             res.json(results)
         }).catch((err) => {
