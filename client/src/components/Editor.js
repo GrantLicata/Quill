@@ -7,20 +7,24 @@ import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
 
 export default function Editor() {
-  const router = useRouter();
   const [isError, setError] = useState(null);
   const [note, setNote] = useState([])
   const [draft, setDraft] = useState([{
     title: '',
     body: '',
   }]);
+
+  // The useRouter hook replaces useNavigate for Next.js applications.
+  const router = useRouter();
   
+  // Handle changes to the draft title when interacting with the editor.
   const onChangeTitle = (e) => {
     setDraft({
       ...draft, [e.target.name]:e.target.value
     });
   } 
   
+  // Handle changes to the body title when interacting with the editor.
   const onChangeBody = (value) => {
     console.log(value)
     setDraft({
@@ -28,10 +32,12 @@ export default function Editor() {
     });
   } 
 
+  // Removes deleted notes from the note list.
   const removeNoteFromList = (noteID) => {
     setNote(note.filter(note => note._id !== noteID));
 }
   
+  // Adds a new note to the database and refreshes the application page.
   const addNote = (e) => {
     e.persist();
     axios.post(`http://localhost:8000/api/addNote`, {
@@ -46,6 +52,7 @@ export default function Editor() {
     })
   }
 
+  // Removes a note from the database and triggers the removal of the note form our note list.
   const deleteNote = (noteID) => {
     axios.delete(`http://localhost:8000/api/delete/${noteID}`)
     .then((res) => {
@@ -58,6 +65,7 @@ export default function Editor() {
     })
   }
 
+  // All notes are gathered from the database upon initial render of the Editor component.
   useEffect(() => {
     axios.get('http://localhost:8000/api/allNotes')
     .then((res) => {
