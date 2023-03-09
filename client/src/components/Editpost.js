@@ -5,94 +5,30 @@ import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
-function Editpost(props) {
-  let history = useNavigate();
-  const [userInfo, setUserInfo] = useState({
-    title: props.postList[0].title,
-    description: props.postList[0].description,
-    information: props.postList[0].information,
-  });
-  const onChangeValue = (e) => {
-    setUserInfo({
-      ...userInfo,
-      [e.target.name]:e.target.value
-    });
-  }
-  const onDescription = (value) => {
-    setUserInfo({ ...userInfo,
-      description:value
-    });
-  } 
-  const onInformation = (value) => {
-    setUserInfo({ ...userInfo,
-      information:value
-    });
-  }  
- 
-  const [isError, setError] = useState(null);
-  const editNote = async (event) => {
-    try {
-      event.preventDefault();
-      event.persist();
-      if(userInfo.description.length < 10){
-        setError('Required, add note with minimum length of 10 characters');
-        return;
-      }
-      axios.post(`http://localhost:8080/editArticle`, {
-        title: userInfo.title,
-        description: userInfo.description,
-        information: userInfo.information,
-        ids:props.editPostID
-      })
-      .then(res => { // then print response status
-        if(res.data.success === true){
-          history.push('/');
-        }
-      })
-    } catch (error) { throw error;}    
-  }
-return (
-  <> 
-    <form onSubmit={editNote}>
-      <h3> Edit   </h3>
-      <div>
+function EditPost(props) {
+  
+  return (
+    <div className="m-6">
+      {/* Note Editing Form */}
+      <form onSubmit={editNote}>
         <div>
-          <label> Title <span> * </span> </label>
-          <input type="text" name="title" value={userInfo.title} onChange={onChangeValue} placeholder="Title" required />
+          <label className="font-bold">Title: </label>
+          <input className="bg-slate-100 rounded-md pl-2" type="text" name="title" value={note.title} onChange={onChangeTitle} placeholder="Enter title" required />
         </div>
-        <div>
-          <label> Description <span> * </span> </label>
-          <EditorToolbar toolbarId={'t1'} />
-          <ReactQuill
-            theme="snow"
-            value={userInfo.description}
-            onChange={onDescription}
-            placeholder={"Write something awesome..."}
-            modules={modules('t1')}
-            formats={formats}
-          /> 
+        <ReactQuill
+          theme="snow"
+          value={draft.body}
+          onChange={onChangeBody}
+          placeholder={"Write something awesome..."}
+          style={{height: "200px"}}
+          className="mt-3"
+          />
+        <div className="mt-3">
+          {isError !== null && <div> {isError} </div>}
         </div>
-        <br />
-          <div>
-            <label> Additional Information </label>
-            <EditorToolbar toolbarId={'t2'} />
-          <ReactQuill
-            theme="snow"
-            value={userInfo.information}
-            onChange={onInformation}
-            placeholder={"Write something awesome..."}
-            modules={modules('t2')}
-            formats={formats}
-          /> 
-          </div>
-          <br />
-        {isError !== null && <div> {isError} </div>}
-        <div>
-          <button type="submit"> Submit  </button>
-        </div> 
-      </div>
-    </form>
-  </>
-)
+        <button className="bg-blue-200 rounded-lg p-1 hover:bg-blue-400 px-4 py-1 mt-11" type="submit">Submit</button>
+      </form>
+    </div>
+  )
 }
-export default Editpost
+export default EditPost
