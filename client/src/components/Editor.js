@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useRouter } from "next/router";
 import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
+
+// The ReactQuill component is imported as a non-server side component through the dynamic hook. This helps to prevent breakdown of editor functionality following a post.
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Editor() {
   const [isError, setError] = useState(null);
@@ -121,7 +123,7 @@ export default function Editor() {
   )
 }
 
-  //Document that may hold solution to document undefined error:
+  //References for development of the editor:
   // https://flaviocopes.com/error-document-not-defined/
   // https://github.com/rfoel/bulma-toast/issues/33
   // https://www.youtube.com/watch?v=L3miLKtsgak
