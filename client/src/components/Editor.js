@@ -37,7 +37,7 @@ export default function Editor() {
   // Removes deleted notes from the note list.
   const removeNoteFromList = (noteID) => {
     setNote(note.filter(note => note._id !== noteID));
-}
+  }
   
   // Adds a new note to the database and refreshes the application page.
   const addNote = (e) => {
