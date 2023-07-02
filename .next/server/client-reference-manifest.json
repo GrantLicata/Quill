@@ -237,6 +237,14 @@
     }
   },
   "entryCSSFiles": {
+    "/Users/grantlicata/Code/projects/Scribe/src/app/page": {
+      "modules": [
+        "/Users/grantlicata/Code/projects/Scribe/src/app/page.module.css"
+      ],
+      "files": [
+        "static/css/app/page.css"
+      ]
+    },
     "/Users/grantlicata/Code/projects/Scribe/src/app/layout": {
       "modules": [
         "/Users/grantlicata/Code/projects/Scribe/src/app/globals.css",
@@ -244,14 +252,6 @@
       ],
       "files": [
         "static/css/app/layout.css"
-      ]
-    },
-    "/Users/grantlicata/Code/projects/Scribe/src/app/page": {
-      "modules": [
-        "/Users/grantlicata/Code/projects/Scribe/src/app/page.module.css"
-      ],
-      "files": [
-        "static/css/app/page.css"
       ]
     }
   }

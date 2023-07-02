@@ -1,7 +1,7 @@
 "use client";
 
 // Import React dependencies.
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 // Import the Slate editor factory.
 import { createEditor, Editor, Transforms, Element } from "slate";
 // Import the Slate components and React plugin.
@@ -43,16 +43,20 @@ const CustomEditor = {
   },
 };
 
-// Set the initial value presented within the editor.
-const initialValue = [
-  {
-    type: "paragraph",
-    children: [{ text: "A line of text in a paragraph." }],
-  },
-];
-
 export default function Home() {
   const [editor] = useState(() => withReact(createEditor()));
+
+  // Set the initial value presented within the editor.
+  const initialValue = useMemo(
+    () =>
+      JSON.parse(localStorage.getItem("content")) || [
+        {
+          type: "paragraph",
+          children: [{ text: "A line of text in a paragraph." }],
+        },
+      ],
+    []
+  );
 
   const renderElement = useCallback((props) => {
     switch (props.element.type) {
@@ -71,7 +75,20 @@ export default function Home() {
     // Add a toolbar with buttons that call the same methods.
     <div className={style.container}>
       <h1 className={style.title}>Scribe Editor Concept</h1>
-      <Slate editor={editor} initialValue={initialValue}>
+      <Slate
+        editor={editor}
+        initialValue={initialValue}
+        onChange={(value) => {
+          const isAstChange = editor.operations.some(
+            (op) => "set_selection" !== op.type
+          );
+          if (isAstChange) {
+            // Save the value to Local Storage.
+            const content = JSON.stringify(value);
+            localStorage.setItem("content", content);
+          }
+        }}
+      >
         <div>
           <button
             className={style.toolButton}
@@ -92,6 +109,7 @@ export default function Home() {
             Code Block
           </button>
         </div>
+
         <Editable
           editor={editor}
           renderElement={renderElement}
