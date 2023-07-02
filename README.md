@@ -8,3 +8,10 @@ Scribe is being built with the following technologies:
 - [Next.js](https://nextjs.org/)
 - [React](https://react.dev/)
 
+## Instructions for Use
+The current design of Scribe utilizes local storage. In order to explore the functionality of this new application, the following steps must be followed.
+1. Install node
+2. Install node package manager
+3. Clone this repository to your local device
+4. Within the terminal run ```npm install```
+5. Then within the terminal run ```npm run dev```
