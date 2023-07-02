@@ -56,9 +56,9 @@
         "async": false
       }
     },
-    "(app-client)/./src/app/page.js": {
+    "(app-client)/./src/app/page.jsx": {
       "*": {
-        "id": "(sc_client)/./src/app/page.js",
+        "id": "(sc_client)/./src/app/page.jsx",
         "name": "*",
         "chunks": [],
         "async": false
@@ -227,8 +227,8 @@
       ],
       "async": false
     },
-    "/Users/grantlicata/Code/projects/Scribe/src/app/page.js": {
-      "id": "(app-client)/./src/app/page.js",
+    "/Users/grantlicata/Code/projects/Scribe/src/app/page.jsx": {
+      "id": "(app-client)/./src/app/page.jsx",
       "name": "*",
       "chunks": [
         "app/page:static/chunks/app/page.js"
@@ -237,10 +237,6 @@
     }
   },
   "entryCSSFiles": {
-    "/Users/grantlicata/Code/projects/Scribe/src/app/page": {
-      "modules": [],
-      "files": []
-    },
     "/Users/grantlicata/Code/projects/Scribe/src/app/layout": {
       "modules": [
         "/Users/grantlicata/Code/projects/Scribe/src/app/globals.css",
@@ -248,6 +244,14 @@
       ],
       "files": [
         "static/css/app/layout.css"
+      ]
+    },
+    "/Users/grantlicata/Code/projects/Scribe/src/app/page": {
+      "modules": [
+        "/Users/grantlicata/Code/projects/Scribe/src/app/page.module.css"
+      ],
+      "files": [
+        "static/css/app/page.css"
       ]
     }
   }
