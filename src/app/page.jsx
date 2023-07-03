@@ -71,10 +71,19 @@ export default function Home() {
     return <Leaf {...props} />;
   }, []);
 
+  // Database call for all data
+  // ......... todo
+  // Build with axios
+
+  // Submit new note to the database
+  // ......... todo
+  // Build with axios
+
   return (
     // Add a toolbar with buttons that call the same methods.
     <div className={style.container}>
       <h1 className={style.title}>Scribe Editor Concept</h1>
+      <p></p>
       <Slate
         editor={editor}
         initialValue={initialValue}
@@ -142,7 +151,6 @@ export default function Home() {
 
 // The default element type for the editor (paragraph)
 const DefaultElement = (props) => {
-  console.log(props.attributes);
   return <p {...props.attributes}>{props.children}</p>;
 };
 
