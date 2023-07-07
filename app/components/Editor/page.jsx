@@ -59,7 +59,12 @@ export default function TextEditor() {
   // );
 
   //! Temporary initial function
-  const initialValue = [];
+  const initialValue = [
+    {
+      type: "paragraph",
+      children: [{ text: "A line of text in a paragraph." }],
+    },
+  ];
 
   const renderElement = useCallback((props) => {
     switch (props.element.type) {
