@@ -13,4 +13,6 @@ const NoteSchema = new Schema(
 );
 
 //If the Note collection does not exist create a new one.
-export default mongoose.models.Note || mongoose.model("Note", NoteSchema);
+const Note = mongoose.models.Note || mongoose.model("Note", NoteSchema);
+
+export default Note;
