@@ -1,4 +1,4 @@
-import TextEditor from "@components/editor/page";
+import TextEditor from "./components/editor/page";
 
 export default function Home() {
   return (

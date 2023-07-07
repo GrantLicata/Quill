@@ -79,14 +79,6 @@ export default function TextEditor() {
     return <Leaf {...props} />;
   }, []);
 
-  // Database call for all data
-  // ......... todo
-  // Build with axios
-
-  // Submit new note to the database
-  // ......... todo
-  // Build with axios
-
   return (
     // Add a toolbar with buttons that call the same methods.
     <div className={style.container}>
