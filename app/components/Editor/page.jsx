@@ -46,17 +46,20 @@ const CustomEditor = {
 export default function TextEditor() {
   const [editor] = useState(() => withReact(createEditor()));
 
-  // Set the initial value presented within the editor.
-  const initialValue = useMemo(
-    () =>
-      JSON.parse(localStorage.getItem("content")) || [
-        {
-          type: "paragraph",
-          children: [{ text: "A line of text in a paragraph." }],
-        },
-      ],
-    []
-  );
+  // // Set the initial value presented within the editor.
+  // const initialValue = useMemo(
+  //   () =>
+  //     JSON.parse(localStorage.getItem("content")) || [
+  //       {
+  //         type: "paragraph",
+  //         children: [{ text: "A line of text in a paragraph." }],
+  //       },
+  //     ],
+  //   []
+  // );
+
+  //! Temporary initial function
+  const initialValue = [];
 
   const renderElement = useCallback((props) => {
     switch (props.element.type) {
@@ -91,11 +94,11 @@ export default function TextEditor() {
           const isAstChange = editor.operations.some(
             (op) => "set_selection" !== op.type
           );
-          if (isAstChange) {
-            // Save the value to Local Storage.
-            const content = JSON.stringify(value);
-            localStorage.setItem("content", content);
-          }
+          // if (isAstChange) {
+          //   // Save the value to Local Storage.
+          //   const content = JSON.stringify(value);
+          //   localStorage.setItem("content", content);
+          // }
         }}
       >
         <div>
