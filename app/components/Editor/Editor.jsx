@@ -82,8 +82,6 @@ export default function TextEditor() {
   return (
     // Add a toolbar with buttons that call the same methods.
     <div className={style.container}>
-      <h1 className={style.title}>Scribe Editor Concept</h1>
-      <p></p>
       <Slate
         editor={editor}
         initialValue={initialValue}
